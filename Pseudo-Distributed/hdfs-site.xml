@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+
+<!-- Put site-specific property overrides in this file. -->
+<!-- 该文件指定与HDFS相关的配置信息。
+需要修改HDFS默认的块的副本属性，因为HDFS默认情况下每个数据块保存3个副本，
+而在伪分布式模式下运行时，由于只有一个数据节点，
+所以需要将副本个数改为1；否则Hadoop程序会报错。 -->
+
+<configuration>
+
+	<property>
+		<name>dfs.replication</name>
+		<value>1</value>
+		<description>指定HDFS存储数据的副本数目，默认情况下是3份</description>
+	</property>
+	<property>
+		<name>dfs.namenode.name.dir</name>
+		<value>file:/usr/local/hadoop/hadoopdata/namenode</value>
+		<description>namenode存放数据的目录</description>
+	</property>
+	<property>
+		<name>dfs.datanode.data.dir</name>
+		<value>file:/usr/local/hadoop/hadoopdata/datanode</value>
+		<description>datanode存放block块的目录</description>
+	</property>
+	<property>
+		<name>dfs.permissions.enabled</name>
+		<value>false</value>
+		<description>关闭权限验证</description>
+	</property>
+
+</configuration>
